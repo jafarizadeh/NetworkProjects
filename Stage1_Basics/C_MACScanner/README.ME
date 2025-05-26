@@ -1,0 +1,76 @@
+
+````markdown
+# 🛰️ GroupC_MACScanner
+
+A simple yet powerful tool for scanning and displaying local network devices' MAC addresses, IPs, and interfaces.  
+Supports both **Linux** and **Windows** using system-level ARP or neighbor table commands.
+
+---
+
+## 🎯 Project Goal
+
+To develop a Python-based network utility that:
+
+- Scans local network devices using `arp -a` (Windows) or `ip neigh` (Linux)
+- Parses IP, MAC address, and interface from system output
+- Displays the results in a clean tabular format
+- Uses custom logger and table formatter (no external dependencies)
+
+---
+
+## 🧰 Technologies & Dependencies
+
+- Python 3.6+
+- Uses only built-in modules:
+  - `platform`, `subprocess`, `re`
+- Uses internal custom modules:
+  - `netutils.logger`: Colored and structured logger
+  - `netutils.table`: Clean tabular output with aligned columns
+
+✅ **No external packages required** (like `tabulate` or `logging`)
+
+---
+
+## 🚀 How to Run
+
+1. Make sure your ARP cache is populated (ping some local IPs if needed)
+2. Run the script:
+
+```bash
+python mac_scanner.py
+````
+
+On **Linux**, it uses:
+
+```bash
+ip neigh
+```
+
+On **Windows**, it uses:
+
+```bash
+arp -a
+```
+
+---
+
+## 🧪 Sample Output
+
+```
++----------------+-------------------+------------+
+| IP Address     | MAC Address       | Interface  |
++----------------+-------------------+------------+
+| 192.168.1.1    | aa:bb:cc:dd:ee:ff | wlan0      |
+| 192.168.1.10   | 00:11:22:33:44:55 | eth0       |
++----------------+-------------------+------------+
+```
+
+---
+
+## 📎 Notes
+
+* If the output is empty, ping some local IPs first to populate the ARP/neighbor table.
+* The tool converts Windows MAC format (e.g. `AA-BB-CC`) into standard lowercase `aa:bb:cc`.
+* Fully compatible with Python 3 on both Windows and Linux.
+
+---
